@@ -24,13 +24,13 @@ public class DriverFactory {
     static propertyManager propertyManager =new propertyManager();
     public static void setupDriver() {
 
-        String browser = propertyManager.getProperty("BROWSER");
 
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1920x1080";
         Configuration.holdBrowserOpen = false;
         Configuration.screenshots = false;
         Configuration.headless= Objects.equals(propertyManager.getProperty("HEADLESS"),"Y");
+        String browser;
         browser = Objects.equals(propertyManager.getProperty("BROWSER"), null) ? "CHROME" : propertyManager.getProperty("BROWSER");
         switch (browser){
             case "IE":
@@ -54,7 +54,6 @@ public class DriverFactory {
         }
     }
     public static void open(String url) {
-        System.out.println(url);
         Selenide.open(url);
     }
     public static WebDriver currentDriver() {
